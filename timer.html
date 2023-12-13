@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .controllers{
+            display: flex;
+            /* flex-direction: column; */
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="controllers">
+        <button class="StartTimer">StartTimer</button>
+        <button class="PauseTimer">PauseTimer</button>
+        <button class="RestartTimer">RestartTimer</button>
+        <button class="ResetTimer">ResetTimer</button>
+        TimeSet:<div class="timeSet"></div>
+        <div class="timer"></div>
+    </div>
+   
+    <script>
+        let i;
+
+        i = prompt("set time in seconds please");
+
+        i = parseInt(i);
+
+        document.querySelector('.timeSet').innerHTML = i;
+
+        function counter(n) {
+
+            // let i = n;
+
+            let intervalID;
+
+            function countDown(){
+                if(!(isNaN(n)) || (n>0)){
+                    document.querySelector('.timer').innerHTML = n--;
+                }
+            }
+
+            function startInterval(){
+                intervalID = setInterval(countDown,1000);
+            }
+
+            function stopInterval(){
+                clearInterval(intervalID);
+            }
+
+            function restartTimer(){
+                location.reload();
+                document.querySelector('.timer').innerHTML = '00';
+            }
+
+            function resetTimer(){
+                
+                n = '00';
+                n = parseInt(n);
+                document.querySelector('.timeSet').innerHTML = n;
+                document.querySelector('.timer').innerHTML = n;
+
+            }
+
+            document.querySelector('.StartTimer').addEventListener('click',startInterval);
+
+            document.querySelector('.PauseTimer').addEventListener('click',stopInterval);
+
+            document.querySelector('.RestartTimer').addEventListener('click',function(){
+                // stopInterval();
+                restartTimer();
+            })
+
+            document.querySelector('.ResetTimer').addEventListener('click',function(){
+                // stopInterval();
+                resetTimer();
+            })
+            
+        }
+
+        counter(i);
+
+    </script>
+
+</body>
+
+</html>
